@@ -7,33 +7,77 @@
     <title>Dragon Ball</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-        <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="assets/css/styles.css">
 </head>
 
 <body class="bg-black">
 
     <nav>
-        <div class="container-fluid fixed-top">
+        <div class="container-fluid ">
             <div class="row align-items-center">
                 <div class="col-3 text-center ">
-                    <a href="#">
+                    <a href="index.html">
                         <img src="assets/img/logo/dragon-ball-logo.png" alt="Dragon Ball Z Logo" width="200px">
                     </a>
 
                 </div>
                 <div class="col-9 gap-5 d-flex justify-content-end align-items-center pe-5">
                     <a href="index.html" class="fw-bold text-white fs-5">Home</a>
-                    <a href="#" class="fw-bold text-white fs-5">Characters</a>
-                    <a href="#" class="fw-bold text-white fs-5">Planets</a>
+                    <a href="characters.html" class="fw-bold text-white fs-5">Characters</a>
+                    <a href="planets.html" class="fw-bold text-white fs-5">Planets</a>
                 </div>
             </div>
         </div>
     </nav>
 
+    <div class="container-fluid">
+        <div class="row banner-planets" style="background-color: rgb(255, 153, 0);">
+            <div class="col text-center">
+                <img src="assets/img/Characters.png" alt="Planets Text" style="width: 27%;">
+            </div>
+        </div>
+    </div>
+
+    <section>
+        <div class="container my-5">
+            <div class="row" id="characterContainer">
+
+            </div>
+        </div>
+    </section>
+
+<script>
+  const characterContainer = document.getElementById("characterContainer");
+
+  const fetchCharacters = async () => {
+    const response = await fetch('https://dragonball-api.com/api/characters?page=1&limit=150');
+    const data = await response.json();
+    const characters = data.items;
+
+    characters.forEach((character) => {
+      const safeName = encodeURIComponent(character.name);
+      characterContainer.innerHTML += `
+        <div class="col-6 col-sm-6 col-md-4 col-lg-3 my-3">
+          <a href="viewCharacter.html?name=${safeName}">
+            <div class="card rounded-5 character-card w-100 h-100" style="background-image: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url(assets/img/card-bg.jpg); background-size: cover; background-position: center;">
+              <div class="image-container">
+                <img src="${character.image}" alt="Image of ${character.name}">
+              </div>
+            </div>
+          </a>
+        </div>
+      `;
+    });
+  };
+
+  fetchCharacters();
+</script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
         crossorigin="anonymous"></script>
+
+
 </body>
 
 </html>

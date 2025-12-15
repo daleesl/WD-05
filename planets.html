@@ -13,18 +13,18 @@
 <body class="bg-black">
 
     <nav>
-        <div class="container-fluid fixed-top">
+        <div class="container-fluid">
             <div class="row align-items-center">
                 <div class="col-3 text-center ">
-                    <a href="#">
+                    <a href="index.html">
                         <img src="assets/img/logo/dragon-ball-logo.png" alt="Dragon Ball Z Logo" width="200px">
                     </a>
 
                 </div>
                 <div class="col-9 gap-5 d-flex justify-content-end align-items-center pe-5">
                     <a href="index.html" class="fw-bold text-white fs-5">Home</a>
-                    <a href="#" class="fw-bold text-white fs-5">Characters</a>
-                    <a href="#" class="fw-bold text-white fs-5">Planets</a>
+                    <a href="characters.html" class="fw-bold text-white fs-5">Characters</a>
+                    <a href="planets.html" class="fw-bold text-white fs-5">Planets</a>
                 </div>
             </div>
         </div>
@@ -32,15 +32,45 @@
 
 
     <div class="container-fluid">
-        <div class="row banner-planets">
+        <div class="row banner-planets" style="background-color: rgb(255, 153, 0);">
             <div class="col text-center">
-
+                <img src="assets/img/Planets.png" alt="Planets Text" style="width: 20%;">
             </div>
         </div>
     </div>
+    
+    <section>
+        <div class="container my-4">
+            <div class="row" id="planetContainer">
+            </div>
+        </div>
+    </section>
 
     
+<script>
+        var planetContainer = document.getElementById("planetContainer");
 
+        const loadPlanets = async (id) => {
+            const response = await fetch('https://dragonball-api.com/api/planets/' + id);
+            const planets = await response.json();
+
+
+            if (planets.image) {
+                planetContainer.innerHTML += `
+            <div class="col-lg-3 col-md-4 col-6 mb-4">
+                    <a><div class="card bg-black rounded-5 character-card w-100 h-100">
+                        <div class="image-container">
+                            <img src="${planets.image}" alt="Image of ${planets.name}">
+                        </div>
+                    </div></a>
+            </div>`;
+            }
+        }
+
+        for (var i = 1; i <= 100; i++) {
+            loadPlanets(i);
+        }
+    </script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
