@@ -2,64 +2,125 @@
 <html lang="en">
 
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Dragon Ball</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-    <link rel="stylesheet" href="assets/css/styles.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dragon Ball</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+  <link rel="stylesheet" href="assets/css/styles.css">
 </head>
 
-<body class="bg-black">
+<body class="body">
+<!-- NAVBAR -->
+  <nav class="bg-dark bg-opacity-75">
+    <div class="container-fluid ">
+      <div class="row align-items-center">
+        <div class="col-3 text-center ">
+          <a href="index.html">
+            <img src="assets/img/logo/dragon-ball-logo.png" alt="Dragon Ball Z Logo" width="200px">
+          </a>
 
-    <nav>
-        <div class="container-fluid ">
-            <div class="row align-items-center">
-                <div class="col-3 text-center ">
-                    <a href="index.html">
-                        <img src="assets/img/logo/dragon-ball-logo.png" alt="Dragon Ball Z Logo" width="200px">
-                    </a>
-
-                </div>
-                <div class="col-9 gap-5 d-flex justify-content-end align-items-center pe-5">
-                    <a href="index.html" class="fw-bold text-white fs-5">Home</a>
-                    <a href="characters.html" class="fw-bold text-white fs-5">Characters</a>
-                    <a href="planets.html" class="fw-bold text-white fs-5">Planets</a>
-                </div>
-            </div>
         </div>
-    </nav>
-
-    <div class="container-fluid">
-        <div class="row banner-planets" style="background-color: rgb(255, 153, 0);">
-            <div class="col text-center">
-                <img src="assets/img/Characters.png" alt="Planets Text" style="width: 27%;">
-            </div>
+        <div class="col-9 gap-5 d-flex justify-content-end align-items-center pe-5 nav-links">
+          <a href="index.html" class="fw-bold text-white fs-5">Home</a>
+          <a href="characters.html" class="fw-bold text-white fs-5">Characters</a>
+          <a href="planets.html" class="fw-bold text-white fs-5">Planets</a>
         </div>
+      </div>
     </div>
+  </nav>
 
-    <section>
-        <div class="container my-5">
-            <div class="row" id="characterContainer">
+  <!-- CHARACTER BANNER -->
+  <div class="container-fluid">
+    <div class="row banner-characters" style="background-color: rgb(255, 153, 0);">
+      <div class="col text-center">
+        <img src="assets/img/Characters.png" alt="Characters Text" style="width: 27%;">
+      </div>
+    </div>
+  </div>
 
-            </div>
+  <!-- SEARCH BAR -->
+  <div class="container-fluid my-3">
+    <div class="row justify-content-end">
+      <div class="col-12 col-md-6 col-lg-3 px-lg-5 mx-lg-5 px-md-1 mx-md-1">
+        <div class="input-group shadow-sm">
+          <span class="bg-warning input-group-text text-white border-0" >Search</span>
+          <input type="text" id="characterSearch" class="form-control border-0" placeholder="Search characters..." aria-label="Search characters">
         </div>
-    </section>
+      </div>
+    </div>
+  </div>
 
-<script>
-  const characterContainer = document.getElementById("characterContainer");
+  <!-- CHARACTER CARDS -->
+  <section>
+    <div class="container my-5">
+      <div class="row" id="characterContainer">
 
-  const fetchCharacters = async () => {
-    const response = await fetch('https://dragonball-api.com/api/characters?page=1&limit=150');
-    const data = await response.json();
-    const characters = data.items;
+      </div>
+    </div>
+  </section>
 
-    characters.forEach((character) => {
-      const safeName = encodeURIComponent(character.name);
-      characterContainer.innerHTML += `
+    <!-- Character Modal -->
+<div class="modal fade db-modal" id="characterModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-xl modal-dialog-scrollable modal-dialog-centered">
+    <div class="modal-content bg-dark text-white rounded-4 border border-warning border-2 shadow">
+      <div class="modal-header bg-warning text-dark rounded-top-4">
+        <h5 class="modal-title mb-0" id="modalName"></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row g-4 align-items-start">
+          <div class="col-md-4">
+            <div class="modal-image-container rounded-3 overflow-hidden bg-black d-flex align-items-center justify-content-center p-2">
+              <img id="modalImage" class="img-fluid" alt="">
+            </div>
+          </div>
+          <div class="col-md-8">
+            <div class="text-warning fw-bold fs-4 mb-3">
+              <span id="modalRace">—</span>
+              <span class="text-white-50"> - </span>
+              <span id="modalGender">—</span>
+            </div>
+
+            <dl class="row mb-0 fs-4">
+              <dt class="col-5 text-secondary">Base Ki:</dt>
+              <dd class="col-7 text-warning fw-bold" id="modalKi">—</dd>
+
+              <dt class="col-5 text-secondary">Max Ki:</dt>
+              <dd class="col-7 text-warning fw-bold" id="modalMaxKi">—</dd>
+
+              <dt class="col-5 text-secondary">Affiliation:</dt>
+              <dd class="col-7 text-warning fw-bold" id="modalAffiliation">—</dd>
+            </dl>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+    crossorigin="anonymous"></script>
+
+
+  <!-- POPULATE API INFO SCRIPT -->
+  <script>
+    const characterContainer = document.getElementById("characterContainer");
+    const characterSearch = document.getElementById("characterSearch");
+
+    const fetchCharacters = async () => {
+      const response = await fetch('https://dragonball-api.com/api/characters?page=1&limit=150');
+      const data = await response.json();
+      const characters = data.items;
+
+      characters.forEach((character) => {
+        characterContainer.innerHTML += `
         <div class="col-6 col-sm-6 col-md-4 col-lg-3 my-3">
-          <a href="viewCharacter.html?name=${safeName}">
-            <div class="card rounded-5 character-card w-100 h-100" style="background-image: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url(assets/img/card-bg.jpg); background-size: cover; background-position: center;">
+          <a href="javascript:void(0)" class="text-decoration-none">
+            <div class="card rounded-5 character-card w-100 h-100"
+                 data-character-id="${character.id}" role="button"
+                 style="background-image: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url(assets/img/card-bg.jpg); background-size: cover; background-position: center;">
               <div class="image-container">
                 <img src="${character.image}" alt="Image of ${character.name}">
               </div>
@@ -67,15 +128,51 @@
           </a>
         </div>
       `;
+      });
+    };
+
+    fetchCharacters();
+
+  // SEARCH FUNCTIONALITY
+  characterSearch.addEventListener('input', () => {
+    const term = characterSearch.value.toLowerCase();
+    const cards = characterContainer.querySelectorAll('.character-card');
+    cards.forEach(card => {
+      const name = card.querySelector('img')?.alt?.toLowerCase() || '';
+      card.closest('[class*="col-"]').classList.toggle('d-none', !name.includes(term));
     });
-  };
+  });
+  </script>
 
-  fetchCharacters();
-</script>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
-        crossorigin="anonymous"></script>
+<!-- MODAL SCRIPT -->
+  <script>
+    const modalEl = document.getElementById('characterModal');
+    const modal = new bootstrap.Modal(modalEl);
+
+    characterContainer.addEventListener('click', async (event) => {
+      const card = event.target.closest('.character-card');
+      if (!card) return;
+
+      const id = card.dataset.characterId;
+      try {
+        const res = await fetch(`https://dragonball-api.com/api/characters/${id}`);
+        const character = await res.json();
+
+        document.getElementById('modalName').textContent = character.name || 'Unknown';
+        document.getElementById('modalImage').src = character.image || '';
+        document.getElementById('modalImage').alt = character.name ? `Image of ${character.name}` : 'Character image';
+        document.getElementById('modalRace').textContent = character.race || '—';
+        document.getElementById('modalGender').textContent = character.gender || '—';
+        document.getElementById('modalKi').textContent = character.ki || '—';
+        document.getElementById('modalMaxKi').textContent = character.maxKi || '—';
+        document.getElementById('modalAffiliation').textContent = character.affiliation || '—';
+        modal.show();
+      } catch (err) {
+        console.error('Failed to load character', err);
+      }
+    });
+  </script>
 
 
 </body>
