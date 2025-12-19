@@ -11,7 +11,7 @@
 </head>
 
 <body class="body">
-<!-- NAVBAR -->
+  <!-- NAVBAR -->
   <nav class="bg-dark bg-opacity-75">
     <div class="container-fluid ">
       <div class="row align-items-center">
@@ -44,8 +44,9 @@
     <div class="row justify-content-end">
       <div class="col-12 col-md-6 col-lg-3 px-lg-5 mx-lg-5 px-md-1 mx-md-1">
         <div class="input-group shadow-sm">
-          <span class="bg-warning input-group-text text-white border-0" >Search</span>
-          <input type="text" id="characterSearch" class="form-control border-0" placeholder="Search characters..." aria-label="Search characters">
+          <span class="bg-warning input-group-text text-white border-0">Search</span>
+          <input type="text" id="characterSearch" class="form-control border-0" placeholder="Search characters..."
+            aria-label="Search characters">
         </div>
       </div>
     </div>
@@ -60,43 +61,44 @@
     </div>
   </section>
 
-    <!-- Character Modal -->
-<div class="modal fade db-modal" id="characterModal" tabindex="-1" aria-hidden="true">
-  <div class="modal-dialog modal-xl modal-dialog-scrollable modal-dialog-centered">
-    <div class="modal-content bg-dark text-white rounded-4 border border-warning border-2 shadow">
-      <div class="modal-header bg-warning text-dark rounded-top-4">
-        <h5 class="modal-title mb-0" id="modalName"></h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <div class="row g-4 align-items-start">
-          <div class="col-md-4">
-            <div class="modal-image-container rounded-3 overflow-hidden bg-black d-flex align-items-center justify-content-center p-2">
-              <img id="modalImage" class="img-fluid" alt="">
+  <!-- Character Modal -->
+  <div class="modal fade db-modal" id="characterModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-scrollable modal-dialog-centered">
+      <div class="modal-content bg-dark text-white rounded-4 border border-warning border-2 shadow">
+        <div class="modal-header bg-warning text-dark rounded-top-4">
+          <h5 class="modal-title mb-0" id="modalName"></h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="row g-4 align-items-start">
+            <div class="col-md-4">
+              <div
+                class="modal-image-container rounded-3 overflow-hidden bg-black d-flex align-items-center justify-content-center p-2">
+                <img id="modalImage" class="img-fluid" alt="">
+              </div>
             </div>
-          </div>
-          <div class="col-md-8">
-            <div class="text-warning fw-bold fs-4 mb-3">
-              <span id="modalRace">—</span>
-              <span class="text-white-50"> - </span>
-              <span id="modalGender">—</span>
+            <div class="col-md-8">
+              <div class="text-warning fw-bold fs-4 mb-3">
+                <span id="modalRace">—</span>
+                <span class="text-white-50"> - </span>
+                <span id="modalGender">—</span>
+              </div>
+
+              <dl class="row mb-0 fs-4">
+                <dt class="col-5 text-secondary">Base Ki:</dt>
+                <dd class="col-7 text-warning fw-bold" id="modalKi">—</dd>
+
+                <dt class="col-5 text-secondary">Max Ki:</dt>
+                <dd class="col-7 text-warning fw-bold" id="modalMaxKi">—</dd>
+
+                <dt class="col-5 text-secondary">Affiliation:</dt>
+                <dd class="col-7 text-warning fw-bold" id="modalAffiliation">—</dd>
+              </dl>
             </div>
-
-            <dl class="row mb-0 fs-4">
-              <dt class="col-5 text-secondary">Base Ki:</dt>
-              <dd class="col-7 text-warning fw-bold" id="modalKi">—</dd>
-
-              <dt class="col-5 text-secondary">Max Ki:</dt>
-              <dd class="col-7 text-warning fw-bold" id="modalMaxKi">—</dd>
-
-              <dt class="col-5 text-secondary">Affiliation:</dt>
-              <dd class="col-7 text-warning fw-bold" id="modalAffiliation">—</dd>
-            </dl>
           </div>
         </div>
       </div>
     </div>
-  </div>
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
@@ -133,19 +135,19 @@
 
     fetchCharacters();
 
-  // SEARCH FUNCTIONALITY
-  characterSearch.addEventListener('input', () => {
-    const term = characterSearch.value.toLowerCase();
-    const cards = characterContainer.querySelectorAll('.character-card');
-    cards.forEach(card => {
-      const name = card.querySelector('img')?.alt?.toLowerCase() || '';
-      card.closest('[class*="col-"]').classList.toggle('d-none', !name.includes(term));
+    // SEARCH FUNCTIONALITY
+    characterSearch.addEventListener('input', () => {
+      const term = characterSearch.value.toLowerCase();
+      const cards = characterContainer.querySelectorAll('.character-card');
+      cards.forEach(card => {
+        const name = card.querySelector('img')?.alt?.toLowerCase() || '';
+        card.closest('[class*="col-"]').classList.toggle('d-none', !name.includes(term));
+      });
     });
-  });
   </script>
 
 
-<!-- MODAL SCRIPT -->
+  <!-- MODAL SCRIPT -->
   <script>
     const modalEl = document.getElementById('characterModal');
     const modal = new bootstrap.Modal(modalEl);
