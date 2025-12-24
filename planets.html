@@ -12,24 +12,37 @@
 
 <body class="bg-black body">
     <!-- NAVBAR -->
-    <nav class="bg-dark bg-opacity-75">
+    <nav class="navbar navbar-expand-lg bg-dark bg-opacity-75">
         <div class="container-fluid">
-            <div class="row align-items-center">
-                <div class="col-3 text-center ">
-                    <a href="index.html">
-                        <img src="assets/img/logo/dragon-ball-logo.png" alt="Dragon Ball Z Logo" width="200px">
-                    </a>
+            <a class="navbar-brand" href="index.html">
+                <img src="assets/img/logo/dragon-ball-logo.png" alt="Dragon Ball Z Logo" width="150px">
+            </a>
+            
+            <button class="navbar-toggler border-0 p-1" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
-                </div>
-                <div class="col-9 gap-5 d-flex justify-content-end align-items-center pe-5">
-                    <a href="index.html" class="fw-bold text-white fs-5">Home</a>
-                    <a href="characters.html" class="fw-bold text-white fs-5">Characters</a>
-                    <a href="planets.html" class="fw-bold text-white fs-5">Planets</a>
-                </div>
+            <!-- Navigation Links -->
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto justify-content-end w-100">
+                    <li class="nav-item">
+                        <a class="nav-link fs-5 fw-bold text-white px-4 py-2" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link fs-5 fw-bold text-white px-4 py-2" href="characters.html">Characters</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link fs-5 fw-bold text-white px-4 py-2" href="planets.html">Planets</a>
+                    </li>
+                </ul>
             </div>
         </div>
     </nav>
 
+
+    
     <!-- PLANETS BANNER -->
     <div class="container-fluid">
         <div class="row banner-planets" style="background-color: rgb(255, 153, 0);">
